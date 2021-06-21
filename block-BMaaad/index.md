@@ -15,15 +15,17 @@ Write code to:-
 
 - create a capped collection named `temperature` with maximum of 3 documents and try inserting more than 3 to see the result.
 
-    -  db.createCollection("temperature", {size:3, max: 3, capped: true})
-
+    -  db.createCollection("temperature", {size:1024, max: 3, capped: true})
+    - db.temparature.insurtMany([{Delhi: 34}, {Mumbai: 32}, {Chennai: 45}]);
+    - db.temperature.find()
 
 - create a simple collection named `humidity`
   
     - db.createCollection("humidity")
 
 - check whether `temperature` collection is capped or not ?
-    - db.getCollectionInfos()
+    - db.teperature.isCapped()
+    
 - Delete `humidity` collection and then the entire database(weather).
     - db.humidity.drop()
     - db.dropDatabase()
