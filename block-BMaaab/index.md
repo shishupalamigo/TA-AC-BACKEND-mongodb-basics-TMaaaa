@@ -10,11 +10,15 @@ Write code to
 
 - create a database of your country name.
 ```
- db.createCollection("India", {size: 29, capped: true});
+use india
+
+ db.createCollection("Mumbai");
 ```
 - check list of databases to see newly created database.
 ```
-    db.getCollectionNames();
+    show dbs
 ```
 - check which database you are currently connected to ?
-
+```
+db
+```
