@@ -95,19 +95,20 @@ db.articles.insertMany(articles);
 ```
 
 5. Find a document using \_id field.
-```
-  db.articles.find({"_id" : ObjectId("60d21304c09bda21a89799ac")}).pretty();
+```js
+
+  db.articles.findOne({"_id" : ObjectId("60d21304c09bda21a89799ac")}).pretty();
 ```
 
 6. 1. Find documents using title
 ```js
-  db.articles.find({'title': 'Article 3'}).pretty();
+  db.articles.findOne({'title': 'Article 3'}).pretty();
 
 ```
 
 7. 2. Find documents using author's name field.
 ```js
-  db.articles.find({'author.name': 'author 4'}).pretty();
+  db.articles.findOne({'author.name': 'author 4'}).pretty();
 
 ```
 
@@ -190,6 +191,12 @@ db.articles.update(
 
 13. find an article using title and increment it's auhtor's age by 5.
 ```js
+db.articles.update(
+  {"_id" : ObjectId("60d21304c09bda21a89799a9")},
+  {$inc: {
+    'author.age': 5
+  }}
+)
 
 ```
 
@@ -335,16 +342,17 @@ db.users.update(
 - Find all users who play either 'football' or 'cricket'.
 ```js
   db.users.find(
-    {$or : [
-      {"sports": 'football'}, 
-      {"sports": 'cricket'}
+    {sports :
+    {$in : [
+      'football', 'cricket'
       ]}
+    } 
   ).pretty();
 ```
 
 - Find all users whose name includes 'ri' in their name.
 ```js
   db.users.find(
-    {'name': {$in: ['ri']}}
+    {'name': /ri/i}
   ).pretty();
 ```
