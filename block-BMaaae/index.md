@@ -15,7 +15,7 @@ Write code to:-
 
 
 - add multiple players in those collections which should have fields like `name`, `age` and `email` and `bid_price`.
-  -  db.cricket.insertOne({"Name": "Virat Kohli", "age": 30, "bid_price": "$3mn" })
+  -  db.cricket.insertMany([{"Name": "Virat Kohli", "age": 30, "bid_price": "$3mn" }, {"Name": "Rohit Sharma", "age": 30, "bid_price": "$5mn" }, {"Name": "Risav Pant", "age": 26, "bid_price": "$2mn" },])
 
 - list all collections in sports database.
   show collections
@@ -28,8 +28,10 @@ Write code to:-
 
   Try inserting more than 3 and see what happens?
 - check whether a collection is capped or not?
+  - db.collectionName.isCapped();
+
 - drop all documents from `football` collection.
-  - db.football.deleteOne({"Name": "Virat Kohli"});
+  - db.football.remove({});
 
 - delete cricket collection completely.
   - db.cricket.drop();
@@ -38,7 +40,7 @@ Write code to:-
   - db.dropDatabase();
 
 - check which database you are connected to ?
-  - db.getName();
+  - db
 
 - connect to test database
   - use test
