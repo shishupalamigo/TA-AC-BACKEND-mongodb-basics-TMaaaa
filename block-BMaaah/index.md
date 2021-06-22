@@ -2,8 +2,16 @@ writeCode
 
 Write code to execute below expressions.
 
-1. Create a database named `blog`.
+1. Create a database named `blog`. 
+```js
+  use blog;
+```
+
 2. Create a collection called 'articles'.
+```js
+  db.createCollection('articles');
+```
+
 3. Insert multiple documents(at least 3) into articles. It should have fields
 
 - title as string
@@ -15,6 +23,54 @@ Write code to execute below expressions.
     - email
     - age
     - example author: {name: 'abc', email: 'abc@gmail', age: 25}
+```js
+let articles = [
+  {
+  title: 'DOM in JavaScript',
+  details: 'Introduction to DOM ',
+  author: {
+    name: 'Shishupal Kumar',
+    email: 'shishupalK123@gamil.com',
+    age: 25
+  },
+  tags: ['js', 'webDevelopment', 'DOM']
+},
+{
+  title: 'Article two',
+  details: 'Article 2',
+  author: {
+    name: 'author 2',
+    email: 'author2@gmail.com',
+    age: 27
+  },
+  tags: ['js', 'mongo', 'Backend']
+},
+{
+  title: 'Article 3',
+  details: 'Article 3',
+  author: {
+    name: 'author 3',
+    email: 'author3@gmail.com',
+    age: '30'
+  },
+  tags: ['js', 'html', 'css']
+},
+{
+  title: 'Article 4',
+  details: 'Article 4',
+  author: {
+    name: 'author 4',
+    email: 'author4@gmail.com',
+    age: '24'
+  },
+  tags: ['js', 'mongo', 'nodejs', 'webdevelopment']
+}
+]
+
+db.articles.insertMany(articles);
+
+```
+
 - tags : Array of strings like ['html', 'css']
 
 ```js
@@ -33,24 +89,115 @@ Write code to execute below expressions.
 ```
 
 4. Find all the articles using `db.COLLECTION_NAME.find()`
+```js
+  db.articles.find().pretty();
+
+```
+
 5. Find a document using \_id field.
+```
+  db.articles.find({"_id" : ObjectId("60d21304c09bda21a89799ac")}).pretty();
+```
+
 6. 1. Find documents using title
+```js
+  db.articles.find({'title': 'Article 3'}).pretty();
+
+```
+
 7. 2. Find documents using author's name field.
+```js
+  db.articles.find({'author.name': 'author 4'}).pretty();
+
+```
+
 8. Find document using a specific tag.
+```js
+  db.articles.find({"tags": "webdevelopment"}).pretty();
+```
 
 9. Update title of a document using its \_id field.
+```js
+  db.articles.update({
+    "_id" : ObjectId("60d21304c09bda21a89799ac")
+  },
+  {
+    $set: {
+      "title": "Renamed Article"
+    }
+  }
+  )
+```
+
 10. Update a author's name using article's title.
+```js
+    db.articles.update({
+    "title": "Renamed Article"
+  },
+  {
+    $set: {
+      "author.name": "Renamed Author" 
+    }
+  }
+  )
+```
+
 11. rename details field to description from all articles in articles collection.
+```js
+db.articles.update(
+  {},
+  { $rename: { 'details': 'description' } },
+  { multi: true }
+);
+```
+
 12. Add additional tag in a specific document.
+```js
+  db.articles.update(
+    {'title': "Renamed Article"},
+    {$push: {'tags': 'backend'}}
+    )  
+```
+
 
 13. Update an article's title using $set and without $set.
+```js
+// with $set
+
+      db.articles.update({
+    "title": "Renamed Article"
+  },
+  {
+    $set: {
+      "author.name": "Author 4" 
+    }
+  }
+  )
+// without set
+      db.articles.update({
+    "title": "Article two"
+  },
+  {  
+      "author.name": "Author"  
+  }
+  )
+
+
+```
+
 
 - Write the differences here ?
 
 13. find an article using title and increment it's auhtor's age by 5.
+```js
+
+```
+
 
 14. Delete a document using \_id field with `db.COLLECTION_NAME.remove()`.
-
+```js
+  db.articles.remove({"_id" : ObjectId("60d21304c09bda21a89799ac")});
+```
 // Sample data
 
 ```js
@@ -168,6 +315,36 @@ db.users.insertMany([
 Insert above data into database to perform below queries:-
 
 - Find all males who play cricket.
+```js
+  db.users.find(
+    {
+      'gender': "Male", 
+      "sports": "cricket"
+    }
+  );
+```
+
 - Update user with extra golf field in sports array whose name is "Steve Ortega".
+```js 
+db.users.update(
+  {'name': "Steve Ortega"},
+  {$push: {sports: "golf"}}  
+)
+```
+
 - Find all users who play either 'football' or 'cricket'.
+```js
+  db.users.find(
+    {$or : [
+      {"sports": 'football'}, 
+      {"sports": 'cricket'}
+      ]}
+  ).pretty();
+```
+
 - Find all users whose name includes 'ri' in their name.
+```js
+  db.users.find(
+    {'name': {$in: ['ri']}}
+  ).pretty();
+```
