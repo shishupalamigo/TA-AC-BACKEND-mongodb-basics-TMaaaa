@@ -69,11 +69,7 @@ mongoexport --db state --collection cities --out ~/Desktop/states/city.json --js
 Export `users` collection from `test` database onto `Desktop` in a file named `exported.json`.
 
 ```js
-  mongoexport 
-  --db test 
-  --collection users 
-  --out /home/shishupal/Desktop/exported.json 
-  --jsonArray
+  mongoexport --db test --collection users --out /home/shishupal/Desktop/exported.json 
 ```
 
 #### Import from csv file
@@ -87,3 +83,7 @@ mongoimport -d DB_NAME -c COLLECTION_NAME --type csv --file elections.csv(file l
 Generate mock csv data from `https://www.convertcsv.com/generate-test-data.htm`
 
 - insert this mock csv data into `test` database into a collection named `students`
+```js
+mongoimport --db test --collection students --type csv --headerline --ignoreBlanks --file /home/shishupal/Downloads/students.csv 
+```
+
