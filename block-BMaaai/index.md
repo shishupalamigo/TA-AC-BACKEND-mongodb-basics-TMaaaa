@@ -8,6 +8,7 @@ DB_NAME --collection COLLECTION_NAME --file cities.json(file location) --jsonArr
 (an array of json data)
 ```
 
+
 host, username and password are optional fields.
 
 - --host : hostname // defaults to localhost:27017
@@ -43,6 +44,17 @@ Go to `https://www.json-generator.com/`
 - download it on `Desktop`
 - import it into mongodb `test` database into a collection named `users`
 
+```js
+
+mongoimport 
+--db test 
+--collection users 
+--file /home/shishupal/Downloads/users.json 
+--jsonArray
+
+```
+
+
 #### Export data from mongodb server to local system in json format using
 
 `mongoexport`command.
@@ -51,9 +63,18 @@ Go to `https://www.json-generator.com/`
 mongoexport --db state --collection cities --out ~/Desktop/states/city.json --jsonArray
 ```
 
+
 ## BLOCK-writeCode
 
 Export `users` collection from `test` database onto `Desktop` in a file named `exported.json`.
+
+```js
+  mongoexport 
+  --db test 
+  --collection users 
+  --out /home/shishupal/Desktop/exported.json 
+  --jsonArray
+```
 
 #### Import from csv file
 
